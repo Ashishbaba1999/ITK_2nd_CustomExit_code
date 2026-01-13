@@ -29,8 +29,7 @@ extern DLLAPI int plm_execute_callbacks2(int* decision, va_list args);
 
 extern DLLAPI int fill_custom_prop(EPM_action_message_t);
 
-
-////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
 #include "Header.h"
 
@@ -79,8 +78,9 @@ extern DLLAPI int fill_custom_prop(EPM_action_message_t msg)
 			POM_name_of_class(tClassID, &cClassName);
 			if (tc_strcmp(cClassName, "P2CCS_PartRevision") == 0)
 			{
-				AOM_ask_value_string(tAttachments[i], "owning_user", &cUserName);
-				AOM_ask_value_string(tAttachments[i], "creation_date", &cCreationDate);
+				AOM_UIF_ask_value(tAttachments[i], "owning_user", &cUserName);
+				AOM_UIF_ask_value(tAttachments[i], "creation_date", &cCreationDate);
+				
 
 				AOM_lock(tAttachments[i]);
 				AOM_UIF_set_value(tAttachments[i], "p2Designer", cUserName);
@@ -108,4 +108,7 @@ extern DLLAPI int plm_execute_callbacks2(int* decision, va_list args)
 	TC_write_syslog("\n\n DLL register success for Log out\n\n");
 	return 0;
 }
+
+
+
 
